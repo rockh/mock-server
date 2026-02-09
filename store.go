@@ -21,8 +21,7 @@ func NewStore(file string) *Store {
 }
 
 func (s *Store) Save(file string) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
+	// Note: caller should hold the lock
 	b, _ := json.MarshalIndent(s.Data, "", "  ")
 	_ = os.WriteFile(file, b, 0644)
 }
